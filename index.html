@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <style>
+       
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+        table img 
+        {
+            border: none;
+            width: 51px;
+            height: 51px;
+        }
+        
+    </style>
+</head>
+<body>
+   <div>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                  <th>Login</th>
+                  <th>Id</th>
+                  <th>Profile</th>
+                </tr>
+              </thead>
+              <tbody id="showData"> </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+    	$.getJSON("https://api.github.com/users", function (data) {
+                var userdetail = '';     
+                $.each(data, function (key, value) {
+                    userdetail +='<tr>'+'<td>'+ value.login + '</td>' +'<td>'+ value.id + '</td>' +'<td>'+ "<img src=" + value.avatar_url + '</td>' + '</tr>';
+                });
+                $('#showData').append(userdetail);
+             });        
+    });
+</script>
+</html>
